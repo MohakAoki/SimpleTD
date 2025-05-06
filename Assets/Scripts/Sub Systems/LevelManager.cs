@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
     private void Init()
     {
         GameManager.Instance.Money = 100;
+        AudioManager.Instance.PlayMusic("main_theme", 2, true);
         StartCoroutine(StartLevel(_currentLevelIndex));
     }
 

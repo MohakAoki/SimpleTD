@@ -38,6 +38,7 @@ public class ProjectileManager : MonoBehaviour
             bu = Instantiate(bullet, transform);
         }
         bu.Init(speed, damage, origin, dir);
+        AudioManager.Instance.PlaySFXAt("sfx_shoot", 2, origin);
 
         RegisterBullet(bu);
     }
