@@ -14,78 +14,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reward: 200
   waveEntries:
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 4, y: 6}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
     health: {x: 100, y: 120}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+    health: {x: 120, y: 150}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+    health: {x: 120, y: 150}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+    health: {x: 120, y: 150}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+    health: {x: 120, y: 150}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
-  - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
+    health: {x: 120, y: 150}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
     spawnTime: {x: 3, y: 4}
-    health: {x: 110, y: 140}
+    health: {x: 120, y: 150}

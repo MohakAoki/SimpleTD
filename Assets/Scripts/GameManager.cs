@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private void UnloadScene()
     {
+        UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(false);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -147,6 +147,14 @@ public class InputManager : MonoBehaviour
         {
             _selectedEnemy = enemy;
             enemy.SetOutlineEnable(true);
+            MainForm mainForm = UI.Instance.GetForm<MainForm>();
+            mainForm.SetEnemyPanelData(enemy);
+            mainForm.UpdateEnemyHealth(enemy.GetHealthPercentage());
+            mainForm.SetEnemyPanelVisibility(true);
+        }
+        else
+        {
+            UI.Instance.GetForm<MainForm>().SetEnemyPanelVisibility(false);
         }
     }
 

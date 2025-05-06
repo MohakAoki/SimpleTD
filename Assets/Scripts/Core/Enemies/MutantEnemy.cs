@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class MutantEnemy : Enemy
 {
+    [SerializeField] private bool _walk;
     [SerializeField] private Animator[] _anims;
 
     private int _nextPoint;
-    private Outline _outline;
 
     private void Awake()
     {
+        _col = GetComponent<Collider>();
         _outline = GetComponent<Outline>();
     }
 
@@ -28,6 +29,7 @@ public class MutantEnemy : Enemy
 
     public override void Die()
     {
+        _col.enabled = false;
         IsAlive = false;
         _nextPoint = 0;
         GameManager.Instance.Money += _worth;
@@ -37,8 +39,17 @@ public class MutantEnemy : Enemy
 
     public override void Despawn()
     {
+        _col.enabled = false;
         IsAlive = false;
         EnemySpawner.Instance.DespawnEnemy(this);
+    }
+
+    protected override void Respawn()
+    {
+        foreach (var anim in _anims)
+        {
+            anim.SetBool("Crouch", !_walk);
+        }
     }
 
     private void Update()

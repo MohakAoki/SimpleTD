@@ -20,6 +20,7 @@ public class UpgradeForm : Form
     [SerializeField] private Button _mountButton;
     [SerializeField] private Button _headButton;
     [SerializeField] private Button _exitButton;
+    [SerializeField] private Button _outsidePanel;
 
 
     private Tower _tower;
@@ -28,6 +29,9 @@ public class UpgradeForm : Form
     {
         _exitButton.onClick.RemoveAllListeners();
         _exitButton.onClick.AddListener(Close);
+
+        _outsidePanel.onClick.RemoveAllListeners();
+        _outsidePanel.onClick.AddListener(Close);
 
         _baseButton.onClick.RemoveAllListeners();
         _baseButton.onClick.AddListener(OnBaseUpgrade);

@@ -23,7 +23,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDestroy()
     {
-        UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(false);
         Instance = null;
     }
 
@@ -82,7 +81,7 @@ public class EnemySpawner : MonoBehaviour
             movePath[i] = path.GetChild(i + 1);
         }
         float health = Random.Range(entry.health.x, entry.health.y);
-        enemy.Init(health, 2, 2, movePath);
+        enemy.Init(health, 2, movePath);
     }
 
     public void DespawnEnemy(Enemy enemy)

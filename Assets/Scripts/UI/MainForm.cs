@@ -11,11 +11,21 @@ public class MainForm : Form
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private TMP_Text _moneyAmountText;
 
+    [Header("Wave panel")]
     [SerializeField] private GameObject _wavePanel;
     [SerializeField] private TMP_Text _waveText;
 
+    [Header("Enemy Panel")]
+    [SerializeField] private GameObject _enemyPanel;
+    [SerializeField] private Image _enemyIcon;
+    [SerializeField] private TMP_Text _enemyTitle;
+    [SerializeField] private TMP_Text _enemySpeed;
+    [SerializeField] private TMP_Text _enemyHealth;
+    [SerializeField] private RectTransform _enemyHealthbar;
+
 
     private Tower _tower;
+    private Enemy _enemy;
 
     public override void Init()
     {
@@ -84,5 +94,44 @@ public class MainForm : Form
     public void UpdateWave(int current, int total)
     {
         _waveText.text = $"{current}/{total}";
+    }
+
+    public void SetEnemyPanelVisibility(bool enable)
+    {
+        _enemyPanel.SetActive(enable);
+        if (!enable)
+        {
+            _enemy = null;
+        }
+    }
+
+    public void UpdateEnemyHealth(float percent)
+    {
+        _enemyHealthbar.localScale = new Vector3(percent, 1, 1);
+    }
+
+    public void SetEnemyPanelData(Enemy enemy)
+    {
+        _enemy = enemy;
+        EnemyData enemyData = enemy._selfData;
+        _enemyTitle.text = enemyData.name;
+        _enemyIcon.sprite = enemyData.icon;
+        _enemySpeed.text = $"Speed: {enemyData.speed}";
+        _enemyHealth.text = $"Health: {enemyData.health.x} - {enemyData.health.y}";
+    }
+
+    private void Update()
+    {
+        if (_enemy)
+        {
+            if (_enemy.IsAlive)
+            {
+                UpdateEnemyHealth(_enemy.GetHealthPercentage());
+            }
+            else
+            {
+                SetEnemyPanelVisibility(false);
+            }
+        }
     }
 }
