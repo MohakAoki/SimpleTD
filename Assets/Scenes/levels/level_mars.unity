@@ -820,10 +820,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6441c6a48b669745b51720778a81078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveCooldown: 10
+  _waveCooldown: 20
   _waves:
   - {fileID: 11400000, guid: 0ba4f4799e82e604cbb5b4a8e1e68d8d, type: 2}
   - {fileID: 11400000, guid: 6339ce6ace4f4dc4097a439f444cbee5, type: 2}
+  - {fileID: 11400000, guid: aadf55b966640c1438316921af63066e, type: 2}
   _path: {fileID: 1016718721}
   _enemyParent: {fileID: 844817082}
 --- !u!1 &848793372

@@ -11,6 +11,9 @@ public class MainForm : Form
     [SerializeField] private GameObject _pausePanel;
     [SerializeField] private TMP_Text _moneyAmountText;
 
+    [SerializeField] private GameObject _wavePanel;
+    [SerializeField] private TMP_Text _waveText;
+
 
     private Tower _tower;
 
@@ -72,5 +75,14 @@ public class MainForm : Form
     public void UpdateMoney(int amount)
     {
         _moneyAmountText.text = amount.ToString();
+    }
+
+    public void SetWavePanelVisibility(bool enable)
+    {
+        _wavePanel.SetActive(enable);
+    }
+    public void UpdateWave(int current, int total)
+    {
+        _waveText.text = $"{current}/{total}";
     }
 }

@@ -23,6 +23,7 @@ public class TowerRotationUpgrade
 {
     public int upgradeCost;
     public float rotationSpeed;
+    public Material Material;
 }
 
 [Serializable]
@@ -30,6 +31,7 @@ public class TowerRecoilUpgrade
 {
     public int upgradeCost;
     public float recoilSpeed;
+    public Material Material;
 }
 
 [Serializable]
@@ -37,4 +39,5 @@ public class TowerRangeUpgrade
 {
     public int upgradeCost;
     public float range;
+    public Material Material;
 }

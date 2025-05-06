@@ -7,6 +7,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform _headTransform;
     [SerializeField] private Transform _mountTransform;
 
+    [SerializeField] private MeshRenderer[] _base, _mount, _head;
+
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private Transform[] _shootPoints;
 
@@ -37,7 +39,19 @@ public class Tower : MonoBehaviour
         _recoil = data.recoilUpgrades[_recoilUpgrade].recoilSpeed;
         _rotationSpeed = data.rotationUpgrades[_speedUpgrade].rotationSpeed;
 
+        ChangeMaterial(_base, data.rangeUpgrades[_rangeUpgrade].Material);
+        ChangeMaterial(_head, data.recoilUpgrades[_recoilUpgrade].Material);
+        ChangeMaterial(_mount, data.rotationUpgrades[_speedUpgrade].Material);
+
         IsActive = true;
+    }
+
+    private void ChangeMaterial(MeshRenderer[] part, Material material)
+    {
+        foreach (MeshRenderer mr in part)
+        {
+            mr.sharedMaterial = material;
+        }
     }
 
     public void Deactive()

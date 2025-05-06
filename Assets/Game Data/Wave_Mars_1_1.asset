@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d724884930bf689439f91270fff9bae3, type: 3}
   m_Name: Wave_Mars_1_1
   m_EditorClassIdentifier: 
+  reward: 50
   waveEntries:
   - Enemy: {fileID: 2564892564284052172, guid: 4640de731253592428a9bd3260ede784, type: 3}
     spawnTime: {x: 3, y: 5}

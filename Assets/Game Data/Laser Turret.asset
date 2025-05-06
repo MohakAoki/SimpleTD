@@ -22,21 +22,30 @@ MonoBehaviour:
   rotationUpgrades:
   - upgradeCost: 0
     rotationSpeed: 1
+    Material: {fileID: 2100000, guid: 5a1465aa38273f1459d2013c51a83f23, type: 2}
   - upgradeCost: 100
     rotationSpeed: 2
+    Material: {fileID: 2100000, guid: 3a28ff38d6df34f449276642c8cb3ffc, type: 2}
   - upgradeCost: 200
     rotationSpeed: 2.5
+    Material: {fileID: 2100000, guid: 36825ff57d0cdf048b703885400a2dce, type: 2}
   recoilUpgrades:
   - upgradeCost: 0
     recoilSpeed: 1
+    Material: {fileID: 2100000, guid: 3c1b56d4549ef3e45b7cfdb96abd9364, type: 2}
   - upgradeCost: 100
     recoilSpeed: 0.5
+    Material: {fileID: 2100000, guid: 94a39319ba99ac3479eab8666c59e5b9, type: 2}
   - upgradeCost: 200
     recoilSpeed: 0.3
+    Material: {fileID: 2100000, guid: b065ffb6c07ce7943a14cab69ecb23a5, type: 2}
   rangeUpgrades:
   - upgradeCost: 0
     range: 25
+    Material: {fileID: 2100000, guid: 717f87458af64dc4dadf652ea686c5df, type: 2}
   - upgradeCost: 100
     range: 30
+    Material: {fileID: 2100000, guid: 1db60410f62568d4da4e7de9027963bf, type: 2}
   - upgradeCost: 200
     range: 35
+    Material: {fileID: 2100000, guid: 02069f9cde99c2c4dacc4040f0db47f3, type: 2}

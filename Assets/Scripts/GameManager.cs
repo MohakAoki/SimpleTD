@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     private IEnumerator Start()
     {
         yield return LoadScene("level_mars");
-        Money = 100;
     }
 
     private IEnumerator LoadScene(string name)

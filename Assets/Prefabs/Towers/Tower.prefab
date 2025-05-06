@@ -612,6 +612,18 @@ MonoBehaviour:
   IsRoot: 0
   _headTransform: {fileID: 6928580415113533515}
   _mountTransform: {fileID: 2299089633121880419}
+  _base:
+  - {fileID: 5435077879141612405}
+  _mount:
+  - {fileID: 3809840474207819839}
+  - {fileID: 5871320590094651477}
+  - {fileID: 7053441324449796050}
+  _head:
+  - {fileID: 3424193256708733515}
+  - {fileID: 7548343996248097266}
+  - {fileID: 1265026393462316527}
+  - {fileID: 9045410847592813858}
+  - {fileID: 1729635948660872201}
   _bulletPrefab: {fileID: 7344101686414663755, guid: 3c322a9846e8470458489ce8548b7f0c, type: 3}
   _shootPoints:
   - {fileID: 3183213962666003303}

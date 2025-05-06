@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
 
     private void Init()
     {
+        GameManager.Instance.Money = 100;
         IsRunning = true;
     }
 

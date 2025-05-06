@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Wave Data", menuName = "Create/Wave Data")]
 public class WaveData : ScriptableObject
 {
+    public int reward;
     public List<WaveEntry> waveEntries = new List<WaveEntry>();
 }
 

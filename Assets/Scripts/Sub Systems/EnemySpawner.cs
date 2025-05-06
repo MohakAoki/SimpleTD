@@ -10,6 +10,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform _path;
     [SerializeField] private Transform _enemyParent;
 
+    private int _totalEnemies;
+    private int _killedEnemies;
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -20,11 +23,21 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDestroy()
     {
+        UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(false);
         Instance = null;
     }
 
     private void Init()
     {
+        UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(true);
+
+        _totalEnemies = 0;
+        _killedEnemies = 0;
+        foreach (var wave in _waves)
+        {
+            _totalEnemies += wave.waveEntries.Count;
+        }
+        UI.Instance.GetForm<MainForm>().UpdateWave(current: 0, total: _totalEnemies);
         StartCoroutine(SpawnSystem());
     }
 
@@ -32,6 +45,7 @@ public class EnemySpawner : MonoBehaviour
     {      
         foreach (WaveData wave in _waves)
         {
+            GameManager.Instance.Money += wave.reward;
             foreach (WaveEntry entry in wave.waveEntries)
             {
                 yield return new WaitForSeconds(Random.Range(entry.spawnTime.x, entry.spawnTime.y));
@@ -73,6 +87,8 @@ public class EnemySpawner : MonoBehaviour
 
     public void DespawnEnemy(Enemy enemy)
     {
+        _killedEnemies++;
+        UI.Instance.GetForm<MainForm>().UpdateWave(current: _killedEnemies, total: _totalEnemies);
         GlobalPool.Instance.Pool(enemy);
     }
 }
