@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class CameraSystem : MonoBehaviour
 {
@@ -13,14 +14,17 @@ public class CameraSystem : MonoBehaviour
     [SerializeField] private Vector2 _boundUp;
     [SerializeField] private Vector2 _boundRight;
 
+    public bool CanZoom;
     public bool CanPan;
 
     private Camera _cam;
 
-    private Vector3 _velocity;
+    private float _defaultZoom;
+    private Vector3 _zoomVelocity;
+    private Vector3 _panVelocity;
+    private Vector3 _totalVelocity;
     private Vector2 _lastPos;
 
-    private bool _isPaning;
     private float _currentDrag;
 
     private void Awake()
@@ -29,6 +33,8 @@ public class CameraSystem : MonoBehaviour
         Instance = this;
 
         _cam = GetComponent<Camera>();
+        _currentDrag = _drag;
+        _defaultZoom = _cam.transform.position.y;
     }
 
     private void OnDestroy()
@@ -38,6 +44,56 @@ public class CameraSystem : MonoBehaviour
 
 
     private void Update()
+    {
+        Pan();
+        Zoom();
+
+        _totalVelocity = _panVelocity + _zoomVelocity;
+        if (_totalVelocity.magnitude > 0)
+        {
+            Vector3 pos = _cam.transform.position;
+            pos += _totalVelocity * Time.deltaTime;
+            if (pos.x <= _boundRight.x)
+            {
+                pos.x = _boundRight.x;
+            }
+            else if (pos.x >= _boundRight.y)
+            {
+                pos.x = _boundRight.y;
+            }
+
+            if (pos.z <= _boundUp.x)
+            {
+                pos.z = _boundUp.x;
+            }
+            else if (pos.z >= _boundUp.y)
+            {
+                pos.z = _boundUp.y;
+            }
+
+            if (pos.y <= _zoom.x)
+            {
+                pos.y = _zoom.x;
+                _zoomVelocity = Vector3.zero;
+            }
+            else if (pos.y >= _zoom.y)
+            {
+                pos.y = _zoom.y;
+                _zoomVelocity = Vector3.zero;
+            }
+
+            _cam.transform.position = pos;
+            _panVelocity -= _panVelocity.normalized * _panVelocity.magnitude * _currentDrag;
+            _zoomVelocity -= _zoomVelocity.normalized * _zoomVelocity.magnitude * _currentDrag;
+
+            if (_totalVelocity.sqrMagnitude <= _movethreshold)
+            {
+                _totalVelocity = Vector3.zero;
+            }
+        }
+    }
+
+    private void Pan()
     {
         if (!CanPan)
             return;
@@ -60,41 +116,24 @@ public class CameraSystem : MonoBehaviour
 
             if (dir.sqrMagnitude > _movethreshold)
             {
-                _isPaning = true;
-
-                _velocity = new Vector3(dir.y, 0, -dir.x).normalized * _speed;
+                _panVelocity += new Vector3(dir.y, _panVelocity.y, -dir.x).normalized * _speed;
             }
         }
+    }
 
-        if (_isPaning)
+    private void Zoom()
+    {
+        if (!CanZoom)
+            return;
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0)
         {
-            Vector3 pos = _cam.transform.position;
-            pos += _velocity * Time.deltaTime;
-            if (pos.x <= _boundRight.x)
-            {
-                pos.x = _boundRight.x;
-            }
-            else if (pos.x >= _boundRight.y)
-            {
-                pos.x = _boundRight.y;
-            }
-
-            if (pos.z <= _boundUp.x)
-            {
-                pos.z = _boundUp.x;
-            }
-            else if (pos.z >= _boundUp.y)
-            {
-                pos.z = _boundUp.y;
-            }
-
-            _cam.transform.position = pos;
-            _velocity -= _velocity.normalized * _velocity.magnitude * _currentDrag;
-
-            if (_velocity.sqrMagnitude <= _movethreshold)
-            {
-                _isPaning = false;
-            }
+            _zoomVelocity += _cam.transform.forward * _speed;
+        }
+        else if (scroll < 0)
+        {
+            _zoomVelocity += -_cam.transform.forward * _speed;
         }
     }
 
@@ -103,11 +142,6 @@ public class CameraSystem : MonoBehaviour
         Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
 
         return ray;
-    }
-
-    public void EnablePan()
-    {
-        CanPan = true;
     }
 
     public void SetBound(Rect bound)

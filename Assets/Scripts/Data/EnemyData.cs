@@ -8,4 +8,5 @@ public class EnemyData : ScriptableObject
     public Sprite icon;
     public Vector2 health;
     public float speed;
+    public int worth;
 }

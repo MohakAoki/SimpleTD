@@ -88,5 +88,9 @@ public class EnemySpawner : MonoBehaviour
         _killedEnemies++;
         UI.Instance.GetForm<MainForm>().UpdateWave(current: _killedEnemies, total: _totalEnemies);
         GlobalPool.Instance.Pool(enemy);
+        if (_killedEnemies >= _totalEnemies)
+        {
+            LevelManager.Instance.OnLevelFinish();
+        }
     }
 }

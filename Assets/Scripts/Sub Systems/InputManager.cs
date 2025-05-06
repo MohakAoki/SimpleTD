@@ -7,11 +7,11 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance;
 
     [SerializeField] private LayerMask _rayLayer;
-    [SerializeField] private Transform _nodesParent;
     [SerializeField] private TowerData[] _availableTowers;
     [SerializeField] private Transform _radiusSphere;
     [SerializeField] private Rect _cameraBound;
     [SerializeField] private bool _usePan;
+    [SerializeField] private bool _useZoom;
 
     public LayerMask EnemyLayer;
 
@@ -35,6 +35,7 @@ public class InputManager : MonoBehaviour
     {
         CameraSystem.Instance.SetBound(_cameraBound);
         CameraSystem.Instance.CanPan = _usePan;
+        CameraSystem.Instance.CanZoom = _useZoom;
         IsRunning = true;
     }
 
@@ -97,7 +98,7 @@ public class InputManager : MonoBehaviour
         GlobalPool.Instance.Pool(_selectedTower);
         _selectedTower.Deactive();
 
-        Tower newNode = Instantiate(towerData.prefab, pos, Quaternion.identity, _nodesParent);
+        Tower newNode = Instantiate(towerData.prefab, pos, Quaternion.identity, GlobalPool.Instance.transform);
         newNode.Init(towerData);
         SelectTower(null);
     }

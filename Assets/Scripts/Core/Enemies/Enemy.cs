@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
         _rotationSpeed = rotationSpeed;
 
         _health = _maxHealth;
-        _worth = 10;
+        _worth = _selfData.worth;
 
         _outline.enabled = false;
         _col.enabled = true;

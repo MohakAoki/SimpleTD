@@ -273,7 +273,6 @@ MonoBehaviour:
   _rayLayer:
     serializedVersion: 2
     m_Bits: 113
-  _nodesParent: {fileID: 6253737351430432092}
   _availableTowers:
   - {fileID: 11400000, guid: 53017a73c921cbd4d8ece17ff3578174, type: 2}
   _radiusSphere: {fileID: 5923520112742798550}
@@ -281,9 +280,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 86
     y: 62
-    width: 112
+    width: 34
     height: 70
   _usePan: 1
+  _useZoom: 1
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64

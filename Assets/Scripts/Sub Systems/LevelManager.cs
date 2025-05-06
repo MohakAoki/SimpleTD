@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public string LevelName;
 
     [SerializeField] private GameObject[] _levels;
+    [SerializeField] private int _levelPrize;
 
     private int _currentLevelIndex;
     private GameObject _currentLevel;
@@ -27,14 +28,16 @@ public class LevelManager : MonoBehaviour
     private void Init()
     {
         GameManager.Instance.Money = 100;
-        StartLevel(_currentLevelIndex);
+        StartCoroutine(StartLevel(_currentLevelIndex));
     }
 
-    private void StartLevel(int index)
+    private IEnumerator StartLevel(int index)
     {
         if (_currentLevel != null)
         {
             Destroy(_currentLevel);
+            yield return new WaitUntil(() => InputManager.Instance == null);
+            yield return new WaitUntil(() => EnemySpawner.Instance == null);
         }
 
         _currentLevel = Instantiate(_levels[index], transform);
@@ -55,7 +58,8 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            StartLevel(_currentLevelIndex);
+            GameManager.Instance.Money += _levelPrize;
+            StartCoroutine(StartLevel(_currentLevelIndex));
         }
     }
 
