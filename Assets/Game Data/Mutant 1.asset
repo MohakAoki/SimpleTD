@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c022ee9ee8c0f9040ae3bbd12be2ec25, type: 3}
   m_Name: Mutant 1
   m_EditorClassIdentifier: 
-  name: Mutant norm
+  name: Mutant
   description: normal mutant
   icon: {fileID: 21300000, guid: edaf5aa5c50471b41aa69070c7344452, type: 3}
   health: {x: 30, y: 85}

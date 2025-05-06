@@ -18,7 +18,6 @@ public class EnemySpawner : MonoBehaviour
         Debug.Assert(Instance == null);
 
         Instance = this;
-        Init();
     }
 
     private void OnDestroy()
@@ -26,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         Instance = null;
     }
 
-    private void Init()
+    public void Init()
     {
         UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(true);
 
@@ -57,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(WaveEntry entry, Transform path)
     {
-        GameObject obj = GlobalPool.Instance.GetObject(entry.Enemy.GetType());
+        GameObject obj = GlobalPool.Instance.GetObject(entry.Enemy._selfData.name);
         Enemy enemy = null;
         if (obj == null)
         {

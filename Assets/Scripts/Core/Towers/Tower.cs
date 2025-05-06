@@ -66,6 +66,9 @@ public class Tower : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (InputManager.Instance == null)
+            return;
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, _range, InputManager.Instance.EnemyLayer);
 
         float minDistance = float.PositiveInfinity;

@@ -44,7 +44,9 @@ public class ProjectileManager : MonoBehaviour
 
     public void OnBulletHit(Bullet bullet, Enemy target)
     {
-        target.Hit(bullet.Damage);
+        if (target != null)
+            target.Hit(bullet.Damage);
+
         _activeBullets.Remove(bullet);
         GlobalPool.Instance.Pool(bullet);
     }

@@ -224,11 +224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c25db660dccd440b71c67b550365bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignorLayer:
+    serializedVersion: 2
+    m_Bits: 4
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  shootSpeed: 50
-  damage: 5
 --- !u!65 &2080059911526779960
 BoxCollider:
   m_ObjectHideFlags: 0

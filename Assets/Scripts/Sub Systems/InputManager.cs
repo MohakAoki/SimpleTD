@@ -6,9 +6,12 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
 
+    [SerializeField] private LayerMask _rayLayer;
     [SerializeField] private Transform _nodesParent;
     [SerializeField] private TowerData[] _availableTowers;
     [SerializeField] private Transform _radiusSphere;
+    [SerializeField] private Rect _cameraBound;
+    [SerializeField] private bool _usePan;
 
     public LayerMask EnemyLayer;
 
@@ -21,8 +24,6 @@ public class InputManager : MonoBehaviour
     {
         Debug.Assert(Instance == null);
         Instance = this;
-
-        Init();
     }
 
     private void OnDestroy()
@@ -30,9 +31,10 @@ public class InputManager : MonoBehaviour
         Instance = null;
     }
 
-    private void Init()
+    public void Init()
     {
-        GameManager.Instance.Money = 100;
+        CameraSystem.Instance.SetBound(_cameraBound);
+        CameraSystem.Instance.CanPan = _usePan;
         IsRunning = true;
     }
 
@@ -54,7 +56,7 @@ public class InputManager : MonoBehaviour
             Ray ray = CameraSystem.Instance.Ray();
             Debug.DrawRay(ray.origin, ray.direction * 500, Color.red, 1);
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 500))
+            if (Physics.Raycast(ray, out RaycastHit hit, 500, _rayLayer))
             {
                 if (hit.collider.TryGetComponent(out Enemy enemy))
                 {

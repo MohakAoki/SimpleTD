@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         get { return _money; }
     }
 
+    public bool IsLoading { get; private set; }
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -31,12 +33,14 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadScene(string name)
     {
+        IsLoading = true;
         AsyncOperation LoadingOp = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
 
         while (LoadingOp.isDone)
         {
             yield return null;
         }
+        IsLoading = false;
     }
 
     private void UnloadScene()

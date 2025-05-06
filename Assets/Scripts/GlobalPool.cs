@@ -42,11 +42,11 @@ public class GlobalPool : MonoBehaviour
         return result;
     }
 
-    public GameObject GetObject(Type objType)
+    public GameObject GetObject(string name)
     {
         for (int i = 0; i < _gameObjectPool.Count; i++)
         {
-            if (_gameObjectPool[i].GetType().Equals(objType))
+            if (_gameObjectPool[i].name.Contains(name))
             {
                 GameObject obj = _gameObjectPool[i].gameObject;
                 _gameObjectPool.RemoveAt(i);
