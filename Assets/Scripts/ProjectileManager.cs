@@ -52,6 +52,11 @@ public class ProjectileManager : MonoBehaviour
         GlobalPool.Instance.Pool(bullet);
     }
 
+    public void ClearBullets()
+    {
+        _activeBullets.Clear();
+    }
+
     private void Update()
     {
         foreach (Bullet bullet in _activeBullets)

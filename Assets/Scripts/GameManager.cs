@@ -55,23 +55,28 @@ public class GameManager : MonoBehaviour
         }
         IsLoading = false;
         UI.Instance.CloseForm(loadingForm);
+        UI.Instance.CloseForm<MainMenuForm>();
     }
 
     private IEnumerator UnloadScene()
     {
         UI.Instance.CloseForm<MainForm>();
+
+        IsLoading = true;
         AsyncOperation unloadingOp = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 
         LoadingForm loadingForm = UI.Instance.GetForm<LoadingForm>();
         loadingForm.SetProgress(1);
         loadingForm.SetText("... Unloading");
         UI.Instance.OpenForm(loadingForm);
+        GlobalPool.Instance.FreePool();
 
         for (int i = 90; i > 0; i--)
         {
             loadingForm.SetProgress(Mathf.Sin(i / 180f * Mathf.PI));
             yield return null;
         }
+        IsLoading = false;
         UI.Instance.CloseForm(loadingForm);
         UI.Instance.OpenForm<MainMenuForm>();
     }

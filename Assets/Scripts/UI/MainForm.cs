@@ -89,6 +89,7 @@ public class MainForm : Form
 
     private void OnExit()
     {
+        OnResume();
         GameManager.Instance.ExitLevel();
     }
 

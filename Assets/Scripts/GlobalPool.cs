@@ -71,4 +71,15 @@ public class GlobalPool : MonoBehaviour
             obj.transform.parent = transform;
         }
     }
+
+    public void FreePool()
+    {
+        _gameObjectPool.Clear();
+        ProjectileManager.Instance.ClearBullets();
+
+        foreach (Transform item in transform)
+        {
+            Destroy(item.gameObject);
+        }
+    }
 }
