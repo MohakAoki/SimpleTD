@@ -62,47 +62,6 @@ public class MainForm : Form
         gameObject.SetActive(false);
     }
 
-    private void OnPause()
-    {
-        if (Time.timeScale == 0)
-        {
-            OnResume();
-        }
-        else
-        {
-            Time.timeScale = 0;
-            _pausePanel.SetActive(true);
-        }
-    }
-
-    private void OnResume()
-    {
-        _pausePanel.SetActive(false);
-        Time.timeScale = 1;
-    }
-
-    private void OnRestart()
-    {
-        OnResume();
-        GameManager.Instance.RestartLevel();
-    }
-
-    private void OnExit()
-    {
-        OnResume();
-        GameManager.Instance.ExitLevel();
-    }
-
-    private void OnSFXChange(float percent)
-    {
-        AudioManager.Instance.SetSFXVolume(percent);
-    }
-
-    private void OnMusicChange(float percent)
-    {
-        AudioManager.Instance.SetAudioVolume(percent);
-    }
-
     public void UpdateMoney(int amount)
     {
         _moneyAmountText.text = amount.ToString();
@@ -154,5 +113,46 @@ public class MainForm : Form
                 SetEnemyPanelVisibility(false);
             }
         }
+    }
+
+    private void OnPause()
+    {
+        if (Time.timeScale == 0)
+        {
+            OnResume();
+        }
+        else
+        {
+            Time.timeScale = 0;
+            _pausePanel.SetActive(true);
+        }
+    }
+
+    private void OnResume()
+    {
+        _pausePanel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    private void OnRestart()
+    {
+        OnResume();
+        GameManager.Instance.RestartLevel();
+    }
+
+    private void OnExit()
+    {
+        OnResume();
+        GameManager.Instance.ExitLevel();
+    }
+
+    private void OnSFXChange(float percent)
+    {
+        AudioManager.Instance.SetSFXVolume(percent);
+    }
+
+    private void OnMusicChange(float percent)
+    {
+        AudioManager.Instance.SetAudioVolume(percent);
     }
 }

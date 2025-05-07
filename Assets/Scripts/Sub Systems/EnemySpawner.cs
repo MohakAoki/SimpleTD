@@ -13,18 +13,6 @@ public class EnemySpawner : MonoBehaviour
     private int _totalEnemies;
     private int _killedEnemies;
 
-    private void Awake()
-    {
-        Debug.Assert(Instance == null);
-
-        Instance = this;
-    }
-
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
     public void Init()
     {
         UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(true);
@@ -37,6 +25,30 @@ public class EnemySpawner : MonoBehaviour
         }
         UI.Instance.GetForm<MainForm>().UpdateWave(current: 0, total: _totalEnemies);
         StartCoroutine(SpawnSystem());
+    }
+
+    public void DespawnEnemy(Enemy enemy)
+    {
+        _killedEnemies++;
+        UI.Instance.GetForm<MainForm>().UpdateWave(current: _killedEnemies, total: _totalEnemies);
+        GlobalPool.Instance.Pool(enemy);
+
+        if (_killedEnemies >= _totalEnemies)
+        {
+            LevelManager.Instance.OnLevelFinish();
+        }
+    }
+
+    private void Awake()
+    {
+        Debug.Assert(Instance == null);
+
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 
     private IEnumerator SpawnSystem()
@@ -56,10 +68,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(WaveEntry entry, Transform path)
     {
-        if (entry.Enemy._selfData.name == "Dady")
-            Debug.LogWarning("Dady");
         GameObject obj = GlobalPool.Instance.GetObject(entry.Enemy._selfData.name);
         Enemy enemy = null;
+
         if (obj == null)
         {
             enemy = Instantiate(entry.Enemy, _enemyParent);
@@ -83,16 +94,5 @@ public class EnemySpawner : MonoBehaviour
         }
         float health = Random.Range(entry.health.x, entry.health.y);
         enemy.Init(health, 2, movePath);
-    }
-
-    public void DespawnEnemy(Enemy enemy)
-    {
-        _killedEnemies++;
-        UI.Instance.GetForm<MainForm>().UpdateWave(current: _killedEnemies, total: _totalEnemies);
-        GlobalPool.Instance.Pool(enemy);
-        if (_killedEnemies >= _totalEnemies)
-        {
-            LevelManager.Instance.OnLevelFinish();
-        }
     }
 }

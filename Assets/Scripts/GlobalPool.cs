@@ -9,20 +9,6 @@ public class GlobalPool : MonoBehaviour
 
     private List<MonoBehaviour> _gameObjectPool;
 
-    private void Awake()
-    {
-        Debug.Assert(Instance == null);
-
-        Instance = this;
-
-        _gameObjectPool = new List<MonoBehaviour>();
-    }
-
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
     public T GetObject<T>() where T : MonoBehaviour
     {
         T result = null;
@@ -81,5 +67,19 @@ public class GlobalPool : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+    }
+
+    private void Awake()
+    {
+        Debug.Assert(Instance == null);
+
+        Instance = this;
+
+        _gameObjectPool = new List<MonoBehaviour>();
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }

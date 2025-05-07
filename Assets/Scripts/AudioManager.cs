@@ -16,6 +16,74 @@ public class AudioManager : MonoBehaviour
     private SoundSources[] _sfxSource;
     private SoundSources[] _musicSource;
 
+    public void PlaySFXAt(string sfxName, int priority, Vector3 pos)
+    {
+        AudioClip clip = FindSound(sfxName);
+        if (clip == null)
+            return;
+
+        float sqrDistance = (CameraSystem.Instance.transform.position - pos).sqrMagnitude;
+        if (sqrDistance > _maxCamDistance * _maxCamDistance) // Drop sfx
+            return;
+
+        SoundSources sfx = FindBestSFXSource(sqrDistance, priority);
+        if (sfx == null) // no availabe sfx source
+            return;
+
+        sfx.name = name;
+        sfx.priority = priority;
+        sfx.source.transform.position = pos;
+        PlaySound(sfx.source, clip);
+    }
+
+    public void PlaySFX(string sfxName, int priority)
+    {
+        Vector3 pos = CameraSystem.Instance.transform.position;
+        PlaySFXAt(sfxName, priority, pos);
+    }
+
+    public void PlayMusic(string musicName, int priority, bool solo)
+    {
+        AudioClip clip = FindSound(musicName);
+        if (clip == null)
+            return;
+
+        if (solo)
+        {
+            foreach (SoundSources music in _musicSource)
+            {
+                music.source.Stop();
+            }
+            _musicSource[0].name = name;
+            _musicSource[0].priority = priority;
+            PlaySound(_musicSource[0].source, clip);
+        }
+        else
+        {
+            SoundSources music = FindBestMusicSource(priority);
+            music.name = name;
+            music.source.priority = priority;
+            PlaySound(music.source, clip);
+        }
+    }
+
+    public void SetAudioVolume(float vol)
+    {
+        foreach (SoundSources music in _musicSource)
+        {
+            music.source.volume = vol;
+        }
+    }
+
+    public void SetSFXVolume(float vol)
+    {
+        foreach (SoundSources sfx in _sfxSource)
+        {
+            sfx.source.volume = vol;
+        }
+    }
+
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -124,73 +192,6 @@ public class AudioManager : MonoBehaviour
         source.Play();
     }
 
-
-    public void PlaySFXAt(string sfxName, int priority, Vector3 pos)
-    {
-        AudioClip clip = FindSound(sfxName);
-        if (clip == null)
-            return;
-
-        float sqrDistance = (CameraSystem.Instance.transform.position - pos).sqrMagnitude;
-        if (sqrDistance > _maxCamDistance * _maxCamDistance) // Drop sfx
-            return;
-
-        SoundSources sfx = FindBestSFXSource(sqrDistance, priority);
-        if (sfx == null) // no availabe sfx source
-            return;
-
-        sfx.name = name;
-        sfx.priority = priority;
-        sfx.source.transform.position = pos;
-        PlaySound(sfx.source, clip);
-    }
-
-    public void PlaySFX(string sfxName, int priority)
-    {
-        Vector3 pos = CameraSystem.Instance.transform.position;
-        PlaySFXAt(sfxName, priority, pos);
-    }
-
-    public void PlayMusic(string musicName, int priority, bool solo)
-    {
-        AudioClip clip = FindSound(musicName);
-        if (clip == null)
-            return;
-
-        if (solo)
-        {
-            foreach (SoundSources music in _musicSource)
-            {
-                music.source.Stop();
-            }
-            _musicSource[0].name = name;
-            _musicSource[0].priority = priority;
-            PlaySound(_musicSource[0].source, clip);
-        }
-        else
-        {
-            SoundSources music = FindBestMusicSource(priority);
-            music.name = name;
-            music.source.priority = priority;
-            PlaySound(music.source, clip);
-        }
-    }
-
-    public void SetAudioVolume(float vol)
-    {
-        foreach (SoundSources music in _musicSource)
-        {
-            music.source.volume = vol;
-        }
-    }
-
-    public void SetSFXVolume(float vol)
-    {
-        foreach (SoundSources sfx in _sfxSource)
-        {
-            sfx.source.volume = vol;
-        }
-    }
 
 
 

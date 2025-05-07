@@ -27,6 +27,23 @@ public class CameraSystem : MonoBehaviour
 
     private float _currentDrag;
 
+    public Ray Ray()
+    {
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+
+        return ray;
+    }
+
+    public void SetBound(Rect bound)
+    {
+        _boundRight.x = bound.x;
+        _boundRight.y = bound.xMax;
+
+        _boundUp.x = bound.y;
+        _boundUp.y = bound.yMax;
+    }
+
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -48,49 +65,7 @@ public class CameraSystem : MonoBehaviour
         Pan();
         Zoom();
 
-        _totalVelocity = _panVelocity + _zoomVelocity;
-        if (_totalVelocity.magnitude > 0)
-        {
-            Vector3 pos = _cam.transform.position;
-            pos += _totalVelocity * Time.deltaTime;
-            if (pos.x <= _boundRight.x)
-            {
-                pos.x = _boundRight.x;
-            }
-            else if (pos.x >= _boundRight.y)
-            {
-                pos.x = _boundRight.y;
-            }
-
-            if (pos.z <= _boundUp.x)
-            {
-                pos.z = _boundUp.x;
-            }
-            else if (pos.z >= _boundUp.y)
-            {
-                pos.z = _boundUp.y;
-            }
-
-            if (pos.y <= _zoom.x)
-            {
-                pos.y = _zoom.x;
-                _zoomVelocity = Vector3.zero;
-            }
-            else if (pos.y >= _zoom.y)
-            {
-                pos.y = _zoom.y;
-                _zoomVelocity = Vector3.zero;
-            }
-
-            _cam.transform.position = pos;
-            _panVelocity -= _panVelocity.normalized * _panVelocity.magnitude * _currentDrag;
-            _zoomVelocity -= _zoomVelocity.normalized * _zoomVelocity.magnitude * _currentDrag;
-
-            if (_totalVelocity.sqrMagnitude <= _movethreshold)
-            {
-                _totalVelocity = Vector3.zero;
-            }
-        }
+        ValidatePosition();
     }
 
     private void Pan()
@@ -137,20 +112,51 @@ public class CameraSystem : MonoBehaviour
         }
     }
 
-    public Ray Ray()
+    private void ValidatePosition()
     {
-        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+        _totalVelocity = _panVelocity + _zoomVelocity;
+        if (_totalVelocity.magnitude > 0)
+        {
+            Vector3 pos = _cam.transform.position;
+            pos += _totalVelocity * Time.deltaTime;
+            if (pos.x <= _boundRight.x)
+            {
+                pos.x = _boundRight.x;
+            }
+            else if (pos.x >= _boundRight.y)
+            {
+                pos.x = _boundRight.y;
+            }
 
-        return ray;
-    }
+            if (pos.z <= _boundUp.x)
+            {
+                pos.z = _boundUp.x;
+            }
+            else if (pos.z >= _boundUp.y)
+            {
+                pos.z = _boundUp.y;
+            }
 
-    public void SetBound(Rect bound)
-    {
-        _boundRight.x = bound.x;
-        _boundRight.y = bound.xMax;
+            if (pos.y <= _zoom.x)
+            {
+                pos.y = _zoom.x;
+                _zoomVelocity = Vector3.zero;
+            }
+            else if (pos.y >= _zoom.y)
+            {
+                pos.y = _zoom.y;
+                _zoomVelocity = Vector3.zero;
+            }
 
-        _boundUp.x = bound.y;
-        _boundUp.y = bound.yMax;
+            _cam.transform.position = pos;
+            _panVelocity -= _panVelocity.normalized * _panVelocity.magnitude * _currentDrag;
+            _zoomVelocity -= _zoomVelocity.normalized * _zoomVelocity.magnitude * _currentDrag;
+
+            if (_totalVelocity.sqrMagnitude <= _movethreshold)
+            {
+                _totalVelocity = Vector3.zero;
+            }
+        }
     }
 
     private void OnDrawGizmos()

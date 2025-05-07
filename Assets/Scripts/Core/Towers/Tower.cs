@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public bool IsRoot;
+    public bool IsRoot; // tower placeholder
 
     [SerializeField] private Transform _headTransform;
     [SerializeField] private Transform _mountTransform;
@@ -46,100 +46,9 @@ public class Tower : MonoBehaviour
         IsActive = true;
     }
 
-    private void ChangeMaterial(MeshRenderer[] part, Material material)
-    {
-        foreach (MeshRenderer mr in part)
-        {
-            mr.sharedMaterial = material;
-        }
-    }
-
     public void Deactive()
     {
         IsActive = false;
-    }
-
-    private void Awake()
-    {
-        _outline = GetComponent<Outline>();
-    }
-
-    private void FixedUpdate()
-    {
-        if (InputManager.Instance == null)
-            return;
-
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _range, InputManager.Instance.EnemyLayer);
-
-        float minDistance = float.PositiveInfinity;
-        Collider targetCol = null;
-
-        foreach (Collider collider in colliders)
-        {
-            float distanceToThis = Vector3.Distance(transform.position, collider.transform.position);
-            if (distanceToThis < minDistance && collider.GetComponent<Enemy>().IsAlive)
-            {
-                minDistance = distanceToThis;
-                targetCol = collider;
-            }
-        }
-
-        if (targetCol != null)
-        {
-            _target = targetCol.GetComponent<Enemy>();
-        }
-        else
-        {
-            _target = null;
-        }
-    }
-
-    private void Update()
-    {
-        if (IsActive)
-        {
-            _recoilTimer += Time.deltaTime;
-
-            float angle = FollowTarget();
-
-            if (Mathf.Abs(angle) <= 15)
-            {
-                ShootTarget();
-            }
-        }
-    }
-
-    private float FollowTarget()
-    {
-        float angle = 180;
-
-        if (_target != null)
-        {
-            Vector3 dir = _target.transform.position - _headTransform.position + Vector3.up * 2;
-            Vector3 mountDir = _target.transform.position - _mountTransform.position;
-            mountDir.y = 0;
-
-            _mountTransform.rotation = Quaternion.Lerp(_mountTransform.rotation, Quaternion.LookRotation(mountDir), _rotationSpeed * Time.deltaTime);
-            _headTransform.rotation = Quaternion.Lerp(_headTransform.rotation, Quaternion.LookRotation(dir), _rotationSpeed * Time.deltaTime);
-            Vector3 euler = new Vector3(_headTransform.eulerAngles.x, _mountTransform.eulerAngles.y, _mountTransform.eulerAngles.z);
-            _headTransform.eulerAngles = euler;
-            angle = Vector3.SignedAngle(_headTransform.forward, dir, Vector3.up);
-        }
-
-        return angle;
-    }
-
-    private void ShootTarget()
-    {
-        if (_recoilTimer >= _recoil)
-        {
-            _recoilTimer = 0;
-            int index = _currentShootPoint++ % _shootPoints.Length;
-            Vector3 origin = _shootPoints[index].position;
-            Vector3 dir = _target.transform.position - origin + Vector3.up * 2;
-
-            ProjectileManager.Instance.ShootBullet(_bulletPrefab, origin, dir, 50, _damage);
-        }
     }
 
     public void SetOutlineEnable(bool enabled)
@@ -246,6 +155,98 @@ public class Tower : MonoBehaviour
             GameManager.Instance.Money -= cost;
             _recoilUpgrade++;
             Init(SelfData);
+        }
+    }
+
+
+    private void Awake()
+    {
+        _outline = GetComponent<Outline>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _range, InputManager.Instance.EnemyLayer);
+
+        float minDistance = float.PositiveInfinity;
+        Collider targetCol = null;
+
+        foreach (Collider collider in colliders)
+        {
+            float distanceToThis = Vector3.Distance(transform.position, collider.transform.position);
+            if (distanceToThis < minDistance && collider.GetComponent<Enemy>().IsAlive)
+            {
+                minDistance = distanceToThis;
+                targetCol = collider;
+            }
+        }
+
+        if (targetCol != null)
+        {
+            _target = targetCol.GetComponent<Enemy>();
+        }
+        else
+        {
+            _target = null;
+        }
+    }
+
+    private void Update()
+    {
+        if (IsActive)
+        {
+            _recoilTimer += Time.deltaTime;
+
+            float angle = FollowTarget();
+
+            if (Mathf.Abs(angle) <= 15)
+            {
+                ShootTarget();
+            }
+        }
+    }
+
+    private void ChangeMaterial(MeshRenderer[] part, Material material)
+    {
+        foreach (MeshRenderer mr in part)
+        {
+            mr.sharedMaterial = material;
+        }
+    }
+
+    private float FollowTarget()
+    {
+        float angle = 180;
+
+        if (_target != null)
+        {
+            Vector3 dir = _target.transform.position - _headTransform.position + Vector3.up * 2;
+            Vector3 mountDir = _target.transform.position - _mountTransform.position;
+            mountDir.y = 0;
+
+            _mountTransform.rotation = Quaternion.Lerp(_mountTransform.rotation, Quaternion.LookRotation(mountDir), _rotationSpeed * Time.deltaTime);
+            _headTransform.rotation = Quaternion.Lerp(_headTransform.rotation, Quaternion.LookRotation(dir), _rotationSpeed * Time.deltaTime);
+            Vector3 euler = new Vector3(_headTransform.eulerAngles.x, _mountTransform.eulerAngles.y, _mountTransform.eulerAngles.z);
+            _headTransform.eulerAngles = euler;
+            angle = Vector3.SignedAngle(_headTransform.forward, dir, Vector3.up);
+        }
+
+        return angle;
+    }
+
+    private void ShootTarget()
+    {
+        if (_recoilTimer >= _recoil)
+        {
+            _recoilTimer = 0;
+            int index = _currentShootPoint++ % _shootPoints.Length;
+            Vector3 origin = _shootPoints[index].position;
+            Vector3 dir = _target.transform.position - origin + Vector3.up * 2;
+
+            ProjectileManager.Instance.ShootBullet(_bulletPrefab, origin, dir, 50, _damage);
         }
     }
 

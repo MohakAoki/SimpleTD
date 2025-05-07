@@ -14,30 +14,6 @@ public class UI : MonoBehaviour
 
     List<Form> forms;
 
-    private void Awake()
-    {
-        Debug.Assert(Instance == null);
-        Instance = this;
-
-        Init();
-    }
-
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
-    private void Init()
-    {
-        forms = new List<Form>();
-
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            forms.Add(transform.GetChild(i).GetComponent<Form>());
-            forms[i].Init();
-        }
-    }
-
     public T GetForm<T>() where T : Form
     {
         for (int i = 0; i < forms.Count; i++)
@@ -67,5 +43,29 @@ public class UI : MonoBehaviour
     public void CloseForm(Form form)
     {
         form.Close();
+    }
+
+    private void Awake()
+    {
+        Debug.Assert(Instance == null);
+        Instance = this;
+
+        Init();
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    private void Init()
+    {
+        forms = new List<Form>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            forms.Add(transform.GetChild(i).GetComponent<Form>());
+            forms[i].Init();
+        }
     }
 }

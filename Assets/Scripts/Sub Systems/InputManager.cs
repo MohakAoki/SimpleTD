@@ -20,6 +20,74 @@ public class InputManager : MonoBehaviour
 
     public bool IsRunning { get; private set; }
 
+    public void Init()
+    {
+        CameraSystem.Instance.SetBound(_cameraBound);
+        CameraSystem.Instance.CanPan = _usePan;
+        CameraSystem.Instance.CanZoom = _useZoom;
+        IsRunning = true;
+    }
+
+    public void InstallTower(TowerData towerData)
+    {
+        if (_selectedTower == null)
+        {
+            Debug.LogWarning("No Tower Selected");
+            return;
+        }
+
+        if (GameManager.Instance.Money < towerData.unlockCost)
+        {
+            return;
+        }
+        GameManager.Instance.Money -= towerData.unlockCost;
+
+        Vector3 pos = _selectedTower.transform.position;
+
+        GlobalPool.Instance.Pool(_selectedTower);
+        _selectedTower.Deactive();
+
+        Tower newTower = Instantiate(towerData.prefab, pos, Quaternion.identity, GlobalPool.Instance.transform);
+        newTower.Init(towerData);
+        SelectTower(null);
+    }
+
+    public void SelectTower(Tower selected)
+    {
+        if (_selectedTower != null)
+        {
+            _selectedTower.SetOutlineEnable(false);
+        }
+
+        if (selected != null)
+        {
+            selected.SetOutlineEnable(true);
+            float range = selected.GetRange() * 2;
+            _radiusSphere.transform.localScale = new Vector3(range, .1f, range);
+            _radiusSphere.transform.position = selected.transform.position - Vector3.down * .1f;
+            _radiusSphere.gameObject.SetActive(true);
+
+            if (selected.IsRoot)
+            {
+                InstallForm overlayForm = UI.Instance.GetForm<InstallForm>();
+                overlayForm.SetFormData(_availableTowers.ToArray());
+                UI.Instance.OpenForm(overlayForm);
+            }
+            else
+            {
+                UpgradeForm upgradeForm = UI.Instance.GetForm<UpgradeForm>();
+                upgradeForm.SetData(selected.SelfData, selected);
+                UI.Instance.OpenForm(upgradeForm);
+            }
+        }
+        else
+        {
+            _radiusSphere.gameObject.SetActive(false);
+            UI.Instance.CloseForm<InstallForm>();
+        }
+        _selectedTower = selected;
+    }
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -29,14 +97,6 @@ public class InputManager : MonoBehaviour
     private void OnDestroy()
     {
         Instance = null;
-    }
-
-    public void Init()
-    {
-        CameraSystem.Instance.SetBound(_cameraBound);
-        CameraSystem.Instance.CanPan = _usePan;
-        CameraSystem.Instance.CanZoom = _useZoom;
-        IsRunning = true;
     }
 
     private void Update()
@@ -79,65 +139,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void InstallTower(TowerData towerData)
-    {
-        if (_selectedTower == null)
-        {
-            Debug.LogWarning("No Tower Selected");
-            return;
-        }
-
-        if (GameManager.Instance.Money < towerData.unlockCost)
-        {
-            return;
-        }
-        GameManager.Instance.Money -= towerData.unlockCost;
-
-        Vector3 pos = _selectedTower.transform.position;
-
-        GlobalPool.Instance.Pool(_selectedTower);
-        _selectedTower.Deactive();
-
-        Tower newNode = Instantiate(towerData.prefab, pos, Quaternion.identity, GlobalPool.Instance.transform);
-        newNode.Init(towerData);
-        SelectTower(null);
-    }
-
-    public void SelectTower(Tower selected)
-    {
-        if (_selectedTower != null)
-        {
-            _selectedTower.SetOutlineEnable(false);
-        }
-
-        if (selected != null)
-        {
-            selected.SetOutlineEnable(true);
-            float range = selected.GetRange() * 2;
-            _radiusSphere.transform.localScale = new Vector3(range, .1f, range);
-            _radiusSphere.transform.position = selected.transform.position - Vector3.down * .1f;
-            _radiusSphere.gameObject.SetActive(true);
-
-            if (selected.IsRoot)
-            {
-                InstallForm overlayForm = UI.Instance.GetForm<InstallForm>();
-                overlayForm.SetFormData(_availableTowers.ToArray());
-                UI.Instance.OpenForm(overlayForm);
-            }
-            else
-            {
-                UpgradeForm upgradeForm = UI.Instance.GetForm<UpgradeForm>();
-                upgradeForm.SetData(selected.SelfData, selected);
-                UI.Instance.OpenForm(upgradeForm);
-            }
-        }
-        else
-        {
-            _radiusSphere.gameObject.SetActive(false);
-            UI.Instance.CloseForm<InstallForm>();
-        }
-        _selectedTower = selected;
-    }
 
     private void SelectEnemy(Enemy enemy)
     {

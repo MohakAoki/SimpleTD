@@ -19,6 +19,23 @@ public class GameManager : MonoBehaviour
 
     public bool IsLoading { get; private set; }
 
+    public void LoadGame(string chapterName)
+    {
+        StartCoroutine(LoadScene(chapterName));
+    }
+
+    public void RestartLevel()
+    {
+        StartCoroutine(UnloadScene());
+        StartCoroutine(LoadScene("level_mars"));
+    }
+
+    public void ExitLevel()
+    {
+        StartCoroutine(UnloadScene());
+        SceneManager.LoadScene("main_menu");
+    }
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -79,23 +96,6 @@ public class GameManager : MonoBehaviour
         IsLoading = false;
         UI.Instance.CloseForm(loadingForm);
         UI.Instance.OpenForm<MainMenuForm>();
-    }
-
-    public void LoadGame(string chapterName)
-    {
-        StartCoroutine(LoadScene(chapterName));
-    }
-
-    public void RestartLevel()
-    {
-        StartCoroutine(UnloadScene());
-        StartCoroutine(LoadScene("level_mars"));
-    }
-
-    public void ExitLevel()
-    {
-        StartCoroutine (UnloadScene());
-        SceneManager.LoadScene("main_menu");
     }
 
     private void OnDestroy()

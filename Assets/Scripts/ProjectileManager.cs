@@ -7,29 +7,6 @@ public class ProjectileManager : MonoBehaviour
 
     List<Bullet> _activeBullets;
 
-    private void Awake()
-    {
-        Debug.Assert(Instance == null);
-        Instance = this;
-
-        Init();
-    }
-
-    private void OnDestroy()
-    {
-        Instance = null;
-    }
-
-    private void Init()
-    {
-        _activeBullets = new List<Bullet>();
-    }
-
-    private void RegisterBullet(Bullet bullet)
-    {
-        _activeBullets.Add(bullet);
-    }
-
     public void ShootBullet(Bullet bullet, Vector3 origin, Vector3 dir, float speed, float damage)
     {
         Bullet bu = GlobalPool.Instance.GetObject<Bullet>();
@@ -55,6 +32,29 @@ public class ProjectileManager : MonoBehaviour
     public void ClearBullets()
     {
         _activeBullets.Clear();
+    }
+
+    private void Awake()
+    {
+        Debug.Assert(Instance == null);
+        Instance = this;
+
+        Init();
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
+    private void Init()
+    {
+        _activeBullets = new List<Bullet>();
+    }
+
+    private void RegisterBullet(Bullet bullet)
+    {
+        _activeBullets.Add(bullet);
     }
 
     private void Update()

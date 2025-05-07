@@ -10,7 +10,7 @@ public class MutantEnemy : Enemy
 
     private void Awake()
     {
-        _col = GetComponent<Collider>();
+        _selfCollider = GetComponent<Collider>();
         _outline = GetComponent<Outline>();
     }
 
@@ -34,7 +34,7 @@ public class MutantEnemy : Enemy
 
     public override void Die()
     {
-        _col.enabled = false;
+        _selfCollider.enabled = false;
         IsAlive = false;
         _nextPoint = 0;
         GameManager.Instance.Money += _worth;
@@ -44,9 +44,14 @@ public class MutantEnemy : Enemy
 
     public override void Despawn()
     {
-        _col.enabled = false;
+        _selfCollider.enabled = false;
         IsAlive = false;
         EnemySpawner.Instance.DespawnEnemy(this);
+    }
+
+    public override void SetOutlineEnable(bool enable)
+    {
+        _outline.enabled = enable;
     }
 
     protected override void Respawn()
@@ -111,8 +116,4 @@ public class MutantEnemy : Enemy
         Despawn();
     }
 
-    public override void SetOutlineEnable(bool enable)
-    {
-        _outline.enabled = enable;
-    }
 }

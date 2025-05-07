@@ -9,11 +9,9 @@ public class DadyEnemy : Enemy
     [SerializeField] private Animator[] _anims;
 
     private int _nextPoint;
-    private Collider _selfCollider;
 
     private void Awake()
     {
-        _col = GetComponent<Collider>();
         _outline = GetComponentInChildren<Outline>();
         _selfCollider = GetComponent<Collider>();
         _healEffect.transform.localScale = Vector3.one * _healRange;
@@ -39,7 +37,6 @@ public class DadyEnemy : Enemy
 
     public override void Die()
     {
-        _col.enabled = false;
         IsAlive = false;
         _healEffect.SetActive(false);
         _nextPoint = 0;
@@ -50,10 +47,14 @@ public class DadyEnemy : Enemy
 
     public override void Despawn()
     {
-        _col.enabled = false;
         _healEffect.SetActive(false);
         IsAlive = false;
         EnemySpawner.Instance.DespawnEnemy(this);
+    }
+
+    public override void SetOutlineEnable(bool enable)
+    {
+        _outline.enabled = enable;
     }
 
     protected override void Respawn()
@@ -76,7 +77,7 @@ public class DadyEnemy : Enemy
 
         foreach (Collider col in cols)
         {
-            if (col != _selfCollider && col.TryGetComponent<Enemy>(out Enemy e))
+            if (col != _selfCollider && col.TryGetComponent(out Enemy e))
             {
                 e.Heal(_healPerSecond * Time.deltaTime);
             }
@@ -129,10 +130,6 @@ public class DadyEnemy : Enemy
         Despawn();
     }
 
-    public override void SetOutlineEnable(bool enable)
-    {
-        _outline.enabled = enable;
-    }
 
     private void OnDrawGizmos()
     {

@@ -7,11 +7,11 @@ public abstract class Enemy : MonoBehaviour
     protected float _moveSpeed;
     protected float _rotationSpeed;
     protected float _health;
-    protected int _worth;
+    protected int _worth; // Money on die
 
     public EnemyData _selfData;
     
-    protected Collider _col;
+    protected Collider _selfCollider;
     protected Outline _outline;
 
     protected List<Transform> _path;
@@ -30,10 +30,16 @@ public abstract class Enemy : MonoBehaviour
         _worth = _selfData.worth;
 
         _outline.enabled = false;
-        _col.enabled = true;
+        _selfCollider.enabled = true;
         IsAlive = true;
         Respawn();
     }
+
+    public float GetHealthPercentage()
+    {
+        return _health / _maxHealth;
+    }
+
 
     public abstract void Hit(float damage);
 
@@ -47,8 +53,4 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void SetOutlineEnable(bool enable);
 
-    public float GetHealthPercentage()
-    {
-        return _health / _maxHealth;
-    }
 }

@@ -13,6 +13,24 @@ public class LevelManager : MonoBehaviour
     private int _currentLevelIndex;
     private GameObject _currentLevel;
 
+    public void OnLevelFinish()
+    {
+        // TODO Show Level Finish UI
+
+        // Spawn Next Level
+        _currentLevelIndex++;
+        if (_currentLevelIndex >= _levels.Length) // End of chapter
+        {
+            GameManager.Instance.ExitLevel();
+        }
+        else
+        {
+            GameManager.Instance.Money += _levelPrize;
+            StartCoroutine(StartLevel(_currentLevelIndex));
+        }
+    }
+
+
     private void Awake()
     {
         Debug.Assert(Instance == null);
@@ -45,24 +63,6 @@ public class LevelManager : MonoBehaviour
         _currentLevel = Instantiate(_levels[index], transform);
         InputManager.Instance.Init();
         EnemySpawner.Instance.Init();
-    }
-
-
-    public void OnLevelFinish()
-    {
-        // TODO Show Level Finish UI
-
-        // Spawn Next Level
-        _currentLevelIndex++;
-        if (_currentLevelIndex >= _levels.Length) // End of chapter
-        {
-            GameManager.Instance.ExitLevel();
-        }
-        else
-        {
-            GameManager.Instance.Money += _levelPrize;
-            StartCoroutine(StartLevel(_currentLevelIndex));
-        }
     }
 
     private void OnDestroy()
