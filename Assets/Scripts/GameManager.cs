@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UI.Instance.OpenForm<MainMenuForm>();
+        SceneManager.LoadScene("main_menu");
     }
 
     private IEnumerator LoadScene(string name)
     {
         LoadingForm loadingForm = UI.Instance.GetForm<LoadingForm>();
         loadingForm.SetProgress(0);
+        loadingForm.SetText("Loading ...");
         UI.Instance.OpenForm(loadingForm);
 
         IsLoading = true;
@@ -55,10 +57,23 @@ public class GameManager : MonoBehaviour
         UI.Instance.CloseForm(loadingForm);
     }
 
-    private void UnloadScene()
+    private IEnumerator UnloadScene()
     {
-        UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(false);
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        UI.Instance.CloseForm<MainForm>();
+        AsyncOperation unloadingOp = SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+
+        LoadingForm loadingForm = UI.Instance.GetForm<LoadingForm>();
+        loadingForm.SetProgress(1);
+        loadingForm.SetText("... Unloading");
+        UI.Instance.OpenForm(loadingForm);
+
+        for (int i = 90; i > 0; i--)
+        {
+            loadingForm.SetProgress(Mathf.Sin(i / 180f * Mathf.PI));
+            yield return null;
+        }
+        UI.Instance.CloseForm(loadingForm);
+        UI.Instance.OpenForm<MainMenuForm>();
     }
 
     public void LoadGame(string chapterName)
@@ -68,13 +83,14 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        UnloadScene();
+        StartCoroutine(UnloadScene());
         StartCoroutine(LoadScene("level_mars"));
     }
 
-    public void ExitGame()
+    public void ExitLevel()
     {
-        Application.Quit();
+        StartCoroutine (UnloadScene());
+        SceneManager.LoadScene("main_menu");
     }
 
     private void OnDestroy()

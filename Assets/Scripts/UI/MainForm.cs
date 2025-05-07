@@ -89,7 +89,7 @@ public class MainForm : Form
 
     private void OnExit()
     {
-        GameManager.Instance.ExitGame();
+        GameManager.Instance.ExitLevel();
     }
 
     private void OnSFXChange(float percent)

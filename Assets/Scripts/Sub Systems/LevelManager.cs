@@ -56,7 +56,7 @@ public class LevelManager : MonoBehaviour
         _currentLevelIndex++;
         if (_currentLevelIndex >= _levels.Length) // End of chapter
         {
-            // Return to menu
+            GameManager.Instance.ExitLevel();
         }
         else
         {
