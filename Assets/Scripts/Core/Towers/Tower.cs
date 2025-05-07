@@ -115,7 +115,7 @@ public class Tower : MonoBehaviour
 
         if (_target != null)
         {
-            Vector3 dir = _target.transform.position - _headTransform.position;
+            Vector3 dir = _target.transform.position - _headTransform.position + Vector3.up * 2;
             Vector3 mountDir = _target.transform.position - _mountTransform.position;
             mountDir.y = 0;
 
@@ -136,7 +136,7 @@ public class Tower : MonoBehaviour
             _recoilTimer = 0;
             int index = _currentShootPoint++ % _shootPoints.Length;
             Vector3 origin = _shootPoints[index].position;
-            Vector3 dir = _target.transform.position - origin;
+            Vector3 dir = _target.transform.position - origin + Vector3.up * 2;
 
             ProjectileManager.Instance.ShootBullet(_bulletPrefab, origin, dir, 50, _damage);
         }

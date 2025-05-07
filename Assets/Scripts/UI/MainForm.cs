@@ -23,6 +23,10 @@ public class MainForm : Form
     [SerializeField] private TMP_Text _enemyHealth;
     [SerializeField] private RectTransform _enemyHealthbar;
 
+    [Header("Setting")]
+    [SerializeField] private Slider _sfxVol;
+    [SerializeField] private Slider _musicVol;
+
 
     private Tower _tower;
     private Enemy _enemy;
@@ -40,6 +44,12 @@ public class MainForm : Form
 
         _exitButton.onClick.RemoveAllListeners();
         _exitButton.onClick.AddListener(OnExit);
+
+        _sfxVol.onValueChanged.RemoveAllListeners();
+        _sfxVol.onValueChanged.AddListener(OnSFXChange);
+
+        _musicVol.onValueChanged.RemoveAllListeners();
+        _musicVol.onValueChanged.AddListener(OnMusicChange);
     }
 
     public override void Open()
@@ -80,6 +90,16 @@ public class MainForm : Form
     private void OnExit()
     {
         GameManager.Instance.ExitGame();
+    }
+
+    private void OnSFXChange(float percent)
+    {
+        AudioManager.Instance.SetSFXVolume(percent);
+    }
+
+    private void OnMusicChange(float percent)
+    {
+        AudioManager.Instance.SetAudioVolume(percent);
     }
 
     public void UpdateMoney(int amount)

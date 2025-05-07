@@ -37,6 +37,8 @@ public abstract class Enemy : MonoBehaviour
 
     public abstract void Hit(float damage);
 
+    public abstract void Heal(float amount);
+
     public abstract void Die();
 
     public abstract void Despawn();

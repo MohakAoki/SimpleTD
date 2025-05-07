@@ -176,11 +176,12 @@ MonoBehaviour:
   _radiusSphere: {fileID: 5923520112742798550}
   _cameraBound:
     serializedVersion: 2
-    x: 86
-    y: 62
-    width: 34
-    height: 70
-  _usePan: 0
+    x: 95
+    y: 70
+    width: 10
+    height: 5
+  _usePan: 1
+  _useZoom: 1
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -354,6 +355,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waveCooldown: 20
   _waves:
+  - {fileID: 11400000, guid: 0ba4f4799e82e604cbb5b4a8e1e68d8d, type: 2}
+  - {fileID: 11400000, guid: 6339ce6ace4f4dc4097a439f444cbee5, type: 2}
+  - {fileID: 11400000, guid: aadf55b966640c1438316921af63066e, type: 2}
   - {fileID: 11400000, guid: 7ce4e71f3fe8db9428be8b9cfc1c15e6, type: 2}
   _path: {fileID: 6253737351430432092}
   _enemyParent: {fileID: 2225154688573492643}

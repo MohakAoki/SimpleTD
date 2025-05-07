@@ -26,27 +26,44 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private IEnumerator Start()
+    private void Start()
     {
-        yield return LoadScene("level_mars");
+        UI.Instance.OpenForm<MainMenuForm>();
     }
 
     private IEnumerator LoadScene(string name)
     {
+        LoadingForm loadingForm = UI.Instance.GetForm<LoadingForm>();
+        loadingForm.SetProgress(0);
+        UI.Instance.OpenForm(loadingForm);
+
         IsLoading = true;
         AsyncOperation LoadingOp = SceneManager.LoadSceneAsync(name, LoadSceneMode.Single);
 
         while (LoadingOp.isDone)
         {
+            loadingForm.SetProgress(LoadingOp.progress);
+            yield return null;
+        }
+
+        for (int i = 0; i < 90; i++)
+        {
+            loadingForm.SetProgress(Mathf.Sin(i / 180f * Mathf.PI));
             yield return null;
         }
         IsLoading = false;
+        UI.Instance.CloseForm(loadingForm);
     }
 
     private void UnloadScene()
     {
         UI.Instance.GetForm<MainForm>().SetWavePanelVisibility(false);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadGame(string chapterName)
+    {
+        StartCoroutine(LoadScene(chapterName));
     }
 
     public void RestartLevel()

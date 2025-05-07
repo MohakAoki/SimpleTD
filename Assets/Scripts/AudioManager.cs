@@ -32,13 +32,17 @@ public class AudioManager : MonoBehaviour
         for (int i = 0; i < _sfxPool; i++)
         {
             _sfxSource[i] = new SoundSources($"sfx_{i}", transform);
-            _sfxSource[i].source.spatialBlend = .7f;
-            _sfxSource[i].source.volume = .5f;
+            _sfxSource[i].source.spatialBlend = 1;
+            _sfxSource[i].source.minDistance = 1;
+            _sfxSource[i].source.maxDistance = 100;
+            _sfxSource[i].source.rolloffMode = AudioRolloffMode.Linear;
         }
 
         for (int i = 0; i < _musicPool; i++)
         {
             _musicSource[i] = new SoundSources($"music_{i}", transform);
+            _musicSource[i].source.loop = true;
+            _musicSource[i].source.volume = .7f;
         }
     }
 
@@ -127,8 +131,8 @@ public class AudioManager : MonoBehaviour
         if (clip == null)
             return;
 
-        float sqrDistance = (CameraSystem.Instance.transform.position - pos).magnitude;
-        if (sqrDistance > _maxCamDistance) // Drop sfx
+        float sqrDistance = (CameraSystem.Instance.transform.position - pos).sqrMagnitude;
+        if (sqrDistance > _maxCamDistance * _maxCamDistance) // Drop sfx
             return;
 
         SoundSources sfx = FindBestSFXSource(sqrDistance, priority);
@@ -172,6 +176,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void SetAudioVolume(float vol)
+    {
+        foreach (SoundSources music in _musicSource)
+        {
+            music.source.volume = vol;
+        }
+    }
+
+    public void SetSFXVolume(float vol)
+    {
+        foreach (SoundSources sfx in _sfxSource)
+        {
+            sfx.source.volume = vol;
+        }
+    }
 
 
 

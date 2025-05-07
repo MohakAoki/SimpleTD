@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d724884930bf689439f91270fff9bae3, type: 3}
+  m_Name: Wave_Mars_3_2
+  m_EditorClassIdentifier: 
+  reward: 50
+  waveEntries:
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 8770560238547356087, guid: b941ff7fd2a5a9b49869630e8cdbdd4d, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 50, y: 70}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 7376037563003104958, guid: da54e9bf6d5de3a4b89c244658caa462, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 400, y: 450}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 7376037563003104958, guid: da54e9bf6d5de3a4b89c244658caa462, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 450, y: 460}
+  - Enemy: {fileID: 7376037563003104958, guid: da54e9bf6d5de3a4b89c244658caa462, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 450, y: 460}
+  - Enemy: {fileID: 8770560238547356087, guid: b941ff7fd2a5a9b49869630e8cdbdd4d, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 50, y: 70}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}
+  - Enemy: {fileID: 1632278302688211087, guid: 2025e52edbfacaf44bff11eec94df8b5, type: 3}
+    spawnTime: {x: 2, y: 3}
+    health: {x: 100, y: 120}

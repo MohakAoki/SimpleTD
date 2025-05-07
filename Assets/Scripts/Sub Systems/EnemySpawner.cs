@@ -56,6 +56,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy(WaveEntry entry, Transform path)
     {
+        if (entry.Enemy._selfData.name == "Dady")
+            Debug.LogWarning("Dady");
         GameObject obj = GlobalPool.Instance.GetObject(entry.Enemy._selfData.name);
         Enemy enemy = null;
         if (obj == null)

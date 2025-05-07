@@ -116,7 +116,7 @@ public class CameraSystem : MonoBehaviour
 
             if (dir.sqrMagnitude > _movethreshold)
             {
-                _panVelocity += new Vector3(dir.y, _panVelocity.y, -dir.x).normalized * _speed;
+                _panVelocity += new Vector3(dir.y, 0, -dir.x).normalized * _speed;
             }
         }
     }

@@ -27,6 +27,11 @@ public class MutantEnemy : Enemy
         }
     }
 
+    public override void Heal(float amount)
+    {
+        _health = Mathf.Clamp(_health + amount, 0, _maxHealth);
+    }
+
     public override void Die()
     {
         _col.enabled = false;

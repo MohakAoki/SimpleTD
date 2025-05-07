@@ -779,6 +779,7 @@ MonoBehaviour:
   _levels:
   - {fileID: 6632584694522542888, guid: d34dc4dadfb2bd44d863a06d2ce315f9, type: 3}
   - {fileID: 6632584694522542888, guid: f10ab1efef5227348809266823a1f05c, type: 3}
+  - {fileID: 6632584694522542888, guid: 827bd472ce0320042a29c84348651cad, type: 3}
   _levelPrize: 50
 --- !u!4 &693522667
 Transform:
